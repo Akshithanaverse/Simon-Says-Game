@@ -37,3 +37,7 @@ body{
     border-top-right-radius: 100%;
     margin-bottom:3px;
 }
+.flash
+{
+    background-color: white;
+}
