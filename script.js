@@ -19,7 +19,15 @@ function btnFlash(btn)
     setTimeout(function()
 {
     btn.classList.remove("flash")
-},1000);
+},250);
+}
+function userFlash(btn)
+{
+    btn.classList.add("userFlash");
+    setTimeout(function()
+{
+    btn.classList.remove("userFlash")
+},250);
 }
 function levelUp()
 {
@@ -31,4 +39,15 @@ function levelUp()
     let randColor=btns[randIndx];
     let randBtn=document.querySelector(`.${randColor}`);
     btnFlash(randBtn);
+}
+
+function btnPress()
+{
+    let btn=this;
+    userFlash(btn);
+}
+let allBtns=document.querySelectorAll(".btn");
+for(btn of allBtns)
+{
+    btn.addEventListener("click",btnPress);
 }
