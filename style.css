@@ -55,3 +55,24 @@ body{
 {
     background-color: green;
 }
+@media (max-width: 450px) {
+    .box-container {
+      
+        width: 80vw; 
+        height: 80vw; 
+        justify-content: space-evenly; 
+    }
+
+    .btn {
+        height: 40vw;
+        width: 40vw;  
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+}
