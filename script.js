@@ -7,6 +7,13 @@ let max_score=0;
 let level=0;
 let h2=document.querySelector("h2");
 let h3=document.querySelector("h3");
+
+//adding sounds to buttons
+let error=new Audio("./assets/error.mp3");
+let clck=new Audio("./assets/click.mp3");
+clck.preload = 'auto';
+error.preload = 'auto';
+
 document.addEventListener("keypress",function()
 {
     if(started==false)
@@ -42,12 +49,20 @@ function levelUp()
     //random button choose
     let randIndx=Math.floor(Math.random()*4);
     let randColor=btns[randIndx];
+    playSound();
     let randBtn=document.querySelector(`.${randColor}`);
     game_seq.push(randColor);
     console.log(game_seq);
     btnFlash(randBtn);
 }
-
+function playSound()
+{
+    if (!clck.paused) {
+        clck.pause();
+        clck.currentTime = 0; // Reset sound position
+    }
+    clck.play();
+}
 function CheckAns(idx)
 {
     //console.log("Current level: ",level);
@@ -55,16 +70,17 @@ function CheckAns(idx)
     {
         if(user_seq.length==game_seq.length)
         {
-            setTimeout(levelUp(),1000);
+            setTimeout(levelUp,1000);
         }
     }
     else
     {
-        h2.innerHTML=`Game over!Your score was </b>${level}</b><br> Press any key to start`;
+        h2.innerHTML=`Game over! Your score was </b>${level}</b><br> Press any key to start`;
         h3.innerText=`Your maximum score is ${max_score}`;
-        document.querySelector("body").style.backgroundColor="red";
+        document.querySelector("body").classList.add("flashRed");
+        error.play();
         setTimeout(function(){
-            document.querySelector("body").style.backgroundColor="white";
+            document.querySelector("body").classList.remove("flashRed");
         },150);
         
         reset();
@@ -76,6 +92,7 @@ function btnPress()
     let btn=this;
     userFlash(btn);
     let userColor=btn.getAttribute("id");
+    playSound();
     user_seq.push(userColor);
     CheckAns(user_seq.length-1);
 }
