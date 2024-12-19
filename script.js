@@ -13,7 +13,14 @@ let error=new Audio("./assets/error.mp3");
 let clck=new Audio("./assets/click.mp3");
 clck.preload = 'auto';
 error.preload = 'auto';
-
+document.addEventListener("click",function()
+{
+    if(started==false)
+    {
+        started=true;
+        levelUp();
+    }
+})
 document.addEventListener("keypress",function()
 {
     if(started==false)
